@@ -8,6 +8,7 @@ public class Enemy : Fireball, IDeflectable, IDeflector
     private int dieFrames;
     private SpriteRenderer sprite;
     [SerializeField] private AudioClip dieSound;
+    private Transform player;
 
     new protected void Awake()
     {
@@ -18,6 +19,7 @@ public class Enemy : Fireball, IDeflectable, IDeflector
         dieTime += Random.Range((int)(-dieTime * 1), (int)(dieTime * 1) + 1);
         animate.speed = dieTime / (float)origDieTime;
         Debug.Log(animate.speed);*/
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     new protected void FixedUpdate()
@@ -52,5 +54,18 @@ public class Enemy : Fireball, IDeflectable, IDeflector
         }
         else
             return false;
+    }
+
+    void IDeflectable.deflect(float angle)
+    {
+        this.deflect(angle);
+    }
+
+    new public void deflect(float angle)
+    {
+        Vector2 meToPlayer = new Vector2(transform.position.x - player.position.x, transform.position.y - player.position.y);
+        float newAngle = getAngleFromVector(meToPlayer);
+        this.angle = newAngle;
+        Debug.Log("asdkjahskdjhaskjdh");
     }
 }

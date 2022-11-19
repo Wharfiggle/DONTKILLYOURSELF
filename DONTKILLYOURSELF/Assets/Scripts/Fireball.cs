@@ -8,7 +8,7 @@ public class Fireball : MonoBehaviour, IDeflectable, IDeflector
     private float velx;
     private float vely;
     private Vector2 initialVel;
-    private float angle; //RADIANS
+    protected float angle; //RADIANS
     private float speed;
     [SerializeField] private float speedDec;
     private bool shot;

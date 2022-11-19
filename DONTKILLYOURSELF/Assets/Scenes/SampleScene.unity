@@ -751,6 +751,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spinner
       objectReference: {fileID: 0}
+    - target: {fileID: 8415442432190260640, guid: e0d423910c74c3a4fb409b6cd6530c39, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9010896100332535327, guid: e0d423910c74c3a4fb409b6cd6530c39, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -938,7 +942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 594276472488562522, guid: 5bda1be56f908a741a260324ce369de3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 594276472488562522, guid: 5bda1be56f908a741a260324ce369de3, type: 3}
       propertyPath: m_LocalScale.y
@@ -950,7 +954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 594276472488562522, guid: 5bda1be56f908a741a260324ce369de3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 594276472488562522, guid: 5bda1be56f908a741a260324ce369de3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2049,7 +2053,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 594276472488562522, guid: 5bda1be56f908a741a260324ce369de3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 594276472488562522, guid: 5bda1be56f908a741a260324ce369de3, type: 3}
       propertyPath: m_LocalScale.y
@@ -2057,7 +2061,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 594276472488562522, guid: 5bda1be56f908a741a260324ce369de3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 594276472488562522, guid: 5bda1be56f908a741a260324ce369de3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2474,7 +2478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 594276472488562522, guid: 5bda1be56f908a741a260324ce369de3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 594276472488562522, guid: 5bda1be56f908a741a260324ce369de3, type: 3}
       propertyPath: m_LocalScale.y
@@ -2482,7 +2486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 594276472488562522, guid: 5bda1be56f908a741a260324ce369de3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8
+      value: -8.5
       objectReference: {fileID: 0}
     - target: {fileID: 594276472488562522, guid: 5bda1be56f908a741a260324ce369de3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2592,7 +2596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 594276472488562522, guid: 5bda1be56f908a741a260324ce369de3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 594276472488562522, guid: 5bda1be56f908a741a260324ce369de3, type: 3}
       propertyPath: m_LocalScale.y
@@ -2604,7 +2608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 594276472488562522, guid: 5bda1be56f908a741a260324ce369de3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 594276472488562522, guid: 5bda1be56f908a741a260324ce369de3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3418,6 +3422,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 880296420895217962, guid: cc2d54fe11ee46042ba03468c3185d41, type: 3}
+      propertyPath: fbSpawnTime
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2989490840325958304, guid: cc2d54fe11ee46042ba03468c3185d41, type: 3}
       propertyPath: m_Size.x
       value: 1.46
