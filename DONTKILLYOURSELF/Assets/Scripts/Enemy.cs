@@ -6,25 +6,29 @@ public class Enemy : Fireball, IDeflectable, IDeflector
 {
     [SerializeField] private int dieTime;
     private int dieFrames;
-    private SpriteRenderer sprite;
     [SerializeField] private AudioClip dieSound;
     private Transform player;
+    [SerializeField] private float fbSpeed;
+    [SerializeField] private int fbSpawnTime;
+    private int fbSpawnFrames;
+    [SerializeField] private GameObject fireball;
 
     new protected void Awake()
     {
         base.Awake();
         dieFrames = 0;
-        sprite = GetComponentInChildren<SpriteRenderer>();
         /*int origDieTime = dieTime;
         dieTime += Random.Range((int)(-dieTime * 1), (int)(dieTime * 1) + 1);
         animate.speed = dieTime / (float)origDieTime;
         Debug.Log(animate.speed);*/
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        fbSpawnFrames = fbSpawnTime;
     }
 
     new protected void FixedUpdate()
     {
         base.FixedUpdate();
+        
         if(dieFrames > 0)
         {
             dieFrames--;
@@ -39,6 +43,21 @@ public class Enemy : Fireball, IDeflectable, IDeflector
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, eerp);
             if(dieFrames == 0)
                 Destroy(gameObject);
+        }
+        else
+        {
+            fbSpawnFrames--;
+            if(fbSpawnFrames == 0)
+            {
+                Vector2 meToPlayer = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y);
+                float shootAngle = getAngleFromVector(meToPlayer);
+
+                GameObject fbInstance = Instantiate(fireball, transform.position, Quaternion.identity);
+                IDeflectable fbScript = fbInstance.GetComponent<IDeflectable>();
+                if(fbScript != null)
+                    fbScript.shoot(shootAngle, fbSpeed, new Vector2(velx, vely));
+                fbSpawnFrames = fbSpawnTime;
+            }
         }
     }
 
@@ -56,16 +75,11 @@ public class Enemy : Fireball, IDeflectable, IDeflector
             return false;
     }
 
-    void IDeflectable.deflect(float angle)
+    public override void deflect(float angle)
     {
-        this.deflect(angle);
-    }
-
-    new public void deflect(float angle)
-    {
-        Vector2 meToPlayer = new Vector2(transform.position.x - player.position.x, transform.position.y - player.position.y);
+        base.deflect(angle);
+        /*Vector2 meToPlayer = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y);
         float newAngle = getAngleFromVector(meToPlayer);
-        this.angle = newAngle;
-        Debug.Log("asdkjahskdjhaskjdh");
+        this.angle = newAngle;*/
     }
 }

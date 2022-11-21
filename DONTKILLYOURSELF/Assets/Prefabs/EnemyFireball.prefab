@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9008595008412270557}
   - component: {fileID: 8960984235982271253}
   m_Layer: 7
-  m_Name: Fireball
+  m_Name: EnemyFireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
   scoreSound3: {fileID: 8300000, guid: a4f11c35f00d5bb49905627549c15034, type: 3}
   shootSound: {fileID: 8300000, guid: 3df4ab5a05ee6694f870bd42bd6995f7, type: 3}
   deflectsOffProjectiles: 1
-  hitsEnemies: 1
+  hitsEnemies: 0
   sprite: {fileID: 0}
 --- !u!50 &9008595008412270557
 Rigidbody2D:
@@ -175,7 +175,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 05975f32857b8c143a17a6cfb659ab60, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.1332168, g: 0.1882353, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

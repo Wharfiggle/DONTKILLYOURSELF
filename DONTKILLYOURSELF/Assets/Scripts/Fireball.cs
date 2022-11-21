@@ -5,8 +5,8 @@ using TMPro;
 
 public class Fireball : MonoBehaviour, IDeflectable, IDeflector
 {
-    private float velx;
-    private float vely;
+    protected float velx;
+    protected float vely;
     private Vector2 initialVel;
     protected float angle; //RADIANS
     private float speed;
@@ -55,6 +55,8 @@ public class Fireball : MonoBehaviour, IDeflectable, IDeflector
     [SerializeField] public bool deflectsOffProjectiles;
     private TextMeshProUGUI pointsUI;
     private int pointModifier;
+    [SerializeField] private bool hitsEnemies;
+    [SerializeField] protected SpriteRenderer sprite;
 
     protected void Awake()
     {
@@ -71,6 +73,7 @@ public class Fireball : MonoBehaviour, IDeflectable, IDeflector
         pointModifier = 1;
         pointsUI = GameObject.FindGameObjectWithTag("Points").GetComponent<TextMeshProUGUI>();
         sound = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
+        sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     protected void FixedUpdate()
@@ -147,7 +150,7 @@ public class Fireball : MonoBehaviour, IDeflectable, IDeflector
                                 PlayerHealth pHealth = hit[i].transform.gameObject.GetComponent<PlayerHealth>();
                                 if(pHealth != null)
                                     pHealth.hurt();
-                                if(enemy != null)
+                                if(enemy != null && hitsEnemies)
                                 {
                                     bool valid = enemy.hurt();
                                     if(valid)
@@ -197,22 +200,19 @@ public class Fireball : MonoBehaviour, IDeflectable, IDeflector
             transform.position = new Vector3(transform.position.x + (velx / 50), transform.position.y + (vely / 50), transform.position.z);
 
             //dont go out of bounds
-            if(deflection.empty)
-            {
-                float halfWid = 9.8f - collide.radius;
-                float halfHei = 5f - collide.radius;
-                Vector2 defVec = new Vector2(0, 0);
-                if(transform.position.x <= -halfWid)
-                    defVec.x = 1;
-                else if(transform.position.x >= halfWid)
-                    defVec.x = -1;
-                else if(transform.position.y >= halfHei)
-                    defVec.y = -1;
-                else if(transform.position.y <= -halfHei)
-                    defVec.y = 1;
-                if(defVec.x != 0 || defVec.y != 0)
-                    deflect(getAngleFromVector(defVec));
-            }
+            float halfWid = 9.8f - collide.radius;
+            float halfHei = 5f - collide.radius;
+            Vector2 defVec = new Vector2(0, 0);
+            if(transform.position.x <= -halfWid && velx < 0)
+                defVec.x = 1;
+            else if(transform.position.x >= halfWid && velx > 0)
+                defVec.x = -1;
+            else if(transform.position.y >= halfHei && vely > 0)
+                defVec.y = -1;
+            else if(transform.position.y <= -halfHei && vely < 0)
+                defVec.y = 1;
+            if(defVec.x != 0 || defVec.y != 0)
+                deflect(getAngleFromVector(defVec));
         }
     }
 
@@ -224,6 +224,8 @@ public class Fireball : MonoBehaviour, IDeflectable, IDeflector
         this.initialVel = initialVel;
         if(shootSound != null)
             sound.PlayOneShot(shootSound);
+        if(visuallyRotates)
+            transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI - 90);
         //Debug.Log("a: " + angle * 180 / Mathf.PI);
     }
 
@@ -232,17 +234,20 @@ public class Fireball : MonoBehaviour, IDeflectable, IDeflector
         return deflectsOffProjectiles;
     }
 
-    public void deflect(float angle)
+    public virtual void deflect(float angle)
     {
-        initialVel = Vector2.zero;
-        speed -= speedDec;
-        this.angle = angle;
-        velx = Mathf.Cos(angle) * speed;
-        vely = Mathf.Sin(angle) * speed;
-        if(visuallyRotates)
-            transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI - 90);
-        if(bounceParticle != null)
-            Instantiate(bounceParticle, transform.position, transform.rotation);
+        if(shot)
+        {
+            initialVel = Vector2.zero;
+            speed -= speedDec;
+            this.angle = angle;
+            velx = Mathf.Cos(angle) * speed;
+            vely = Mathf.Sin(angle) * speed;
+            if(visuallyRotates)
+                transform.eulerAngles = new Vector3(0, 0, angle * 180 / Mathf.PI - 90);
+            if(bounceParticle != null)
+                Instantiate(bounceParticle, transform.position, transform.rotation);
+        }
     }
 
     public Vector2 getNormal()
