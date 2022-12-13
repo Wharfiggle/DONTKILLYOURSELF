@@ -82,8 +82,10 @@ public class Fireball : MonoBehaviour, IDeflectable, IDeflector
             pointsUI = GameObject.FindGameObjectWithTag("Points").GetComponent<TextMeshProUGUI>();
         if(shot)
         {
-            velx = Mathf.Cos(angle) * speed + initialVel.x;
-            vely = Mathf.Sin(angle) * speed + initialVel.y;
+            //velx = Mathf.Cos(angle) * speed + initialVel.x;
+            //vely = Mathf.Sin(angle) * speed + initialVel.y;
+            velx = Mathf.Cos(angle) * speed;
+            vely = Mathf.Sin(angle) * speed;
             float scale = 1;
             if(fizzleSpeedThreshold > 0)
                 scale = Mathf.Min(fizzleSpeedThreshold, speed) / fizzleSpeedThreshold;
