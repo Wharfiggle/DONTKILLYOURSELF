@@ -56,8 +56,9 @@ public class EnemySpawners : MonoBehaviour
         }
         else
         {
-            while(rn == prev && spawners.Length != 1)
-                rn = Random.Range(0, spawners.Length);
+            rn = Random.Range(0, spawners.Length - 1);
+            if(rn == prev)
+                rn = prev + 1;
         }
         Vector3 spawnPosition = new Vector3(spawners[rn].position.x, spawners[rn].position.y, spawners[rn].position.z + 1f);
         GameObject enemyInstance = Instantiate(enemy, spawnPosition, transform.rotation);

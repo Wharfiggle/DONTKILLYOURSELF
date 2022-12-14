@@ -17,6 +17,8 @@ public class Menu : MonoBehaviour
     {
         if(pauseMenu != null && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Pause1") || Input.GetButtonDown("Pause2")))
             Pause();
+        else if(pauseMenu == null && Input.GetButtonDown("Pause1") || Input.GetButtonDown("Pause2"))
+            Restart();
     }
 
     public void MainMenu()
