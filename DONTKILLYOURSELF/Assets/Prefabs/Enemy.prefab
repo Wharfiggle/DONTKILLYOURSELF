@@ -66,7 +66,7 @@ MonoBehaviour:
   dieTime: 15
   dieSound: {fileID: 8300000, guid: 927bbfae5378c3f4f9490b5a893a8fd1, type: 3}
   fbSpeed: 17
-  fbSpawnTime: 75
+  fbSpawnTime: 80
   fireball: {fileID: 655099797579873598, guid: a67948b7d39a16e47afc1c9a3f6723ce, type: 3}
   chargeColor: {r: 0.26415092, g: 0.2567999, b: 0, a: 1}
   chargeReleaseTime: 5
