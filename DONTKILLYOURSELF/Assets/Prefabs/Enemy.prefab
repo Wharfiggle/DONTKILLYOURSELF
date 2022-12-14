@@ -68,6 +68,8 @@ MonoBehaviour:
   fbSpeed: 17
   fbSpawnTime: 75
   fireball: {fileID: 655099797579873598, guid: a67948b7d39a16e47afc1c9a3f6723ce, type: 3}
+  chargeColor: {r: 0.26415092, g: 0.2567999, b: 0, a: 1}
+  chargeReleaseTime: 5
 --- !u!50 &9008595008412270557
 Rigidbody2D:
   serializedVersion: 4
@@ -102,9 +104,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.1}
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.45
 --- !u!1 &5900464551238394428
 GameObject:
   m_ObjectHideFlags: 0

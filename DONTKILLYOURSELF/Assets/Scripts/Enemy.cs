@@ -12,6 +12,9 @@ public class Enemy : Fireball, IDeflectable, IDeflector
     [SerializeField] private int fbSpawnTime;
     private int fbSpawnFrames;
     [SerializeField] private GameObject fireball;
+    [SerializeField] private Color chargeColor;
+    [SerializeField] private int chargeReleaseTime;
+    private Color origColor;
 
     new protected void Awake()
     {
@@ -23,6 +26,7 @@ public class Enemy : Fireball, IDeflectable, IDeflector
         Debug.Log(animate.speed);*/
         player = GameObject.FindGameObjectWithTag("Player").transform;
         fbSpawnFrames = fbSpawnTime;
+        origColor = sprite.color;
     }
 
     new protected void FixedUpdate()
@@ -47,6 +51,18 @@ public class Enemy : Fireball, IDeflectable, IDeflector
         else
         {
             fbSpawnFrames--;
+            if(fbSpawnFrames < chargeReleaseTime)
+            {
+                float t = (chargeReleaseTime - fbSpawnFrames) / (float)chargeReleaseTime;
+                t *= t;
+                sprite.color = new Color(chargeColor.r + (origColor.r - chargeColor.r) * t, chargeColor.g + (origColor.g - chargeColor.g) * t, chargeColor.b + (origColor.b - chargeColor.b) * t, chargeColor.a + (origColor.a - chargeColor.a) * t);
+            }
+            else
+            {
+                float t = ((fbSpawnTime - fbSpawnFrames) - chargeReleaseTime) / (float)(fbSpawnTime - chargeReleaseTime);
+                t *= t;
+                sprite.color = new Color(origColor.r + (chargeColor.r - origColor.r) * t, origColor.g + (chargeColor.g - origColor.g) * t, origColor.b + (chargeColor.b - origColor.b) * t, origColor.a + (chargeColor.a - origColor.a) * t);
+            }
             if(fbSpawnFrames == 0)
             {
                 Vector2 meToPlayer = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y);
