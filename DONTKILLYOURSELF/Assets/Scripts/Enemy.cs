@@ -52,7 +52,7 @@ public class Enemy : Fireball, IDeflectable, IDeflector
                 Vector2 meToPlayer = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y);
                 float shootAngle = getAngleFromVector(meToPlayer);
 
-                GameObject fbInstance = Instantiate(fireball, transform.position, Quaternion.identity);
+                GameObject fbInstance = Instantiate(fireball, new Vector3(transform.position.x, transform.position.y, transform.position.z + 1), Quaternion.identity);
                 IDeflectable fbScript = fbInstance.GetComponent<IDeflectable>();
                 if(fbScript != null)
                     fbScript.shoot(shootAngle, fbSpeed, new Vector2(velx, vely));

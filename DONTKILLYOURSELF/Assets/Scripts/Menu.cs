@@ -15,7 +15,7 @@ public class Menu : MonoBehaviour
 
     void Update()
     {
-        if(pauseMenu != null && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape)))
+        if(pauseMenu != null && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Pause1") || Input.GetButtonDown("Pause2")))
             Pause();
     }
 

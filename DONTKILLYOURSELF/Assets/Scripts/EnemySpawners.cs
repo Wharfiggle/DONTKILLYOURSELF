@@ -11,11 +11,13 @@ public class EnemySpawners : MonoBehaviour
     [SerializeField] private GameObject enemy;
     [SerializeField] private float enemySpeed;
     [SerializeField] private AudioClip spawnSound;
+    [SerializeField] private float doubleSpawnChance;
+    [SerializeField] private int startDelay;
     private AudioSource sound;
 
     void Awake()
     {
-        spawnFrames = spawnTime;
+        spawnFrames = spawnTime + startDelay;
         Transform[] tempTransforms = gameObject.GetComponentsInChildren<Transform>();
         spawners = new Transform[tempTransforms.Length - 5];
         portals = new PortalAnimation[spawners.Length];
@@ -39,13 +41,24 @@ public class EnemySpawners : MonoBehaviour
         if(spawnFrames == 0)
         {
             spawnFrames = spawnTime;
-            spawn();
+            spawn(-1);
         }
     }
 
-    void spawn()
+    void spawn(int prev)
     {
         int rn = Random.Range(0, spawners.Length);
+        if(prev == -1)
+        {
+            int doubleSpawn = Random.Range(0, 100);
+            if(doubleSpawn < 100 * doubleSpawnChance)
+                spawn(rn);
+        }
+        else
+        {
+            while(rn == prev && spawners.Length != 1)
+                rn = Random.Range(0, spawners.Length);
+        }
         Vector3 spawnPosition = new Vector3(spawners[rn].position.x, spawners[rn].position.y, spawners[rn].position.z + 1f);
         GameObject enemyInstance = Instantiate(enemy, spawnPosition, transform.rotation);
         IDeflectable enemyScript = enemyInstance.GetComponent<IDeflectable>();

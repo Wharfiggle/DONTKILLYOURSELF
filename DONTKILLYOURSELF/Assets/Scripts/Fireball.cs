@@ -270,9 +270,9 @@ public class Fireball : MonoBehaviour, IDeflectable, IDeflector
         else if(v.x == 0)
         {
             if(v.y > 0)
-                a = 1.5f * Mathf.PI;
-            else
                 a = 0.5f * Mathf.PI;
+            else
+                a = 1.5f * Mathf.PI;
         }
         return a;
     }
